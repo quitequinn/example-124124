@@ -1,0 +1,71 @@
+<!-- HTML CODE -->
+<div class="red-dot"></div>
+<div class="mouse-location">x:0, y:0</div>
+<textarea ></textarea>
+
+
+<!-- CSS CODE -->
+<style>
+   .red-dot{
+      width: 50px;
+      height: 50px;
+      background: red;
+      border-radius: 50%;
+      position: fixed;
+   }
+   .mouse-location{
+      position: fixed;
+      top: 0;
+      right: 0;
+   }
+   textarea{
+      width: 300px;
+      height: 300px;
+      background: yellow
+   }
+</style>
+
+
+<!-- JS CODE -->
+<script>
+   // document.querySelector("body").innerHTML= "<div class='red-dot'></div><div class='mouse-location'>x:0, y:0</div>";
+
+   var dot = document.querySelector(".red-dot"); // Assign <div class="red-dot"></div> to variable
+   var mouse = document.querySelector(".mouse-location"); // Assign <div class="mouse-location"></div> to variable
+   var textarea = document.querySelector("textarea");
+
+   dot.addEventListener("mouseover", function(){ // add a mouseover event to the red dot
+      dot.style.background = "blue"; // make that dot's background blue
+   } );
+
+   dot.addEventListener("mouseout", function(){ // add a mouseout event to the red dot
+      dot.style.background = "red"; // make that dot's background red
+   } );
+
+   window.addEventListener("mousemove", function(event){ // add a mousemouve event to the window
+      mouse.innerHTML = "x:" + event.clientX + ", y:" + event.clientY;
+      dot.style.top = event.clientY+"px"; // make that dot's top value the mouse's y position
+      dot.style.left = event.clientX+"px"; // make that dot's left value the mouse's x position
+   } );
+
+   textarea.addEventListener("keydown", function(event){
+      console.log(event);
+   } );
+
+   function everSecond(){
+      dot.style.top = (Math.random() * 500) + "px";
+      dot.style.left = (Math.random() * 500) + "px";
+      setTimeout(function(){ 
+         everSecond(); // wait a second (1000ms) before running this code
+      }, 1000);
+   }
+   everSecond();
+
+   // See many at: https://www.w3schools.com/jsref/dom_obj_event.asp
+   // onchange			An HTML element has been changed
+   // onclick			The user clicks an HTML element
+   // onmouseover		The user moves the mouse over an HTML element
+   // onmouseout		The user moves the mouse away from an HTML element
+   // onkeydown		The user pushes a keyboard key
+   // onload			The browser has finished loading the page
+</script>
